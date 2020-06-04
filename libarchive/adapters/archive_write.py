@@ -83,7 +83,7 @@ def _archive_write_data(archive, data):
 
 def _archive_write_set_passphrase(archive, passphrase):
     try:
-        passphrase = bytes(passphrase, 'utf-8')
+        passphrase = unicode(passphrase).encode('utf-8')
         return libarchive.calls.archive_write.c_archive_write_set_passphrase(
                 archive, passphrase)
     except:
@@ -92,7 +92,7 @@ def _archive_write_set_passphrase(archive, passphrase):
 
 def _archive_write_set_options(archive, options):
     try:
-        options = bytes(options, 'utf-8')
+        options = unicode(options).encode('utf-8')
         return libarchive.calls.archive_write.c_archive_write_set_options(
                 archive, options)
     except:

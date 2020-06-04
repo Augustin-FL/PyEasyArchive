@@ -51,7 +51,7 @@ def _archive_read_support_format_all(archive):
 
 def _archive_read_add_passphrase(archive, passphrase):
     try:
-        passphrase = bytes(passphrase, 'utf-8')
+        passphrase  = unicode(passphrase).encode('utf-8')
         return libarchive.calls.archive_read.c_archive_read_add_passphrase(
                 archive, passphrase)
     except:
