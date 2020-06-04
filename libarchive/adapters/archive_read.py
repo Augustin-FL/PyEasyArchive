@@ -1,6 +1,7 @@
 import contextlib
 import ctypes
 import logging
+import sys
 
 import libarchive.constants.archive
 import libarchive.exception
@@ -51,7 +52,10 @@ def _archive_read_support_format_all(archive):
 
 def _archive_read_add_passphrase(archive, passphrase):
     try:
-        passphrase  = unicode(passphrase).encode('utf-8')
+        if sys.version_info >= (3, 0):
+            passphrase = bytes(passphrase, 'utf-8')
+        else:
+            passphrase  = unicode(passphrase).encode('utf-8')
         return libarchive.calls.archive_read.c_archive_read_add_passphrase(
                 archive, passphrase)
     except:
